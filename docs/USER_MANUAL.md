@@ -1,44 +1,79 @@
 # User Manual
 
-## Login
+## Access
 
-1. Open http://kubecart.local
-2. Enter:
-   - Username: admin
-   - Password: Admin@123
-3. Click Login
+Open one of the app URLs:
 
-## Todo Operations
+1. http://kubecart.local
+2. https://democart.cloudflareaccess.com (if Cloudflare Access is configured)
 
-- View existing todos after login
-- Add todo using Add field
-- Toggle done/undone using Toggle button
-- Logout using Logout button
+## Login Modes
 
-## Catalog and Cart
+Use the login mode switch at the top:
 
-- Open Catalog tab to browse products
-- Click Add to Cart on any product
-- Open Cart tab to view selected items
-- Click Remove to delete an item
+1. User Login
+2. Admin Login
 
-## Checkout and Payment
+Demo credentials:
 
-- In Cart tab, click Checkout to create pending order
-- Open Payment tab and verify pending order ID
-- Enter card holder name and card last 4 digits
-- Click Pay Now to mark order as paid
-- Open Orders tab to see final status
+1. User: user1 / User@123
+2. Admin: admin / Admin@123
 
-## AI Live Chat Support
+## User Flow
 
-- Open AI Chat tab
-- Ask questions about login, cart, payment, or troubleshooting
-- Assistant replies from backend endpoint /api/chat/send
-- If OPENAI_API_KEY is configured in k8s/09-secret-ai.yaml, chat uses OpenAI.
-- If no key is configured, chat uses built-in fallback support responses.
+### Browse and Buy
 
-## Troubleshooting for Users
+1. Open Catalog tab.
+2. Click Add to Cart for required products.
+3. Open Cart tab and click Checkout.
+4. Open Payment tab.
+5. Fill customer details and shipping address.
+6. Enter card last 4 digits.
+7. Click Pay Now.
 
-- If page does not load, check ingress and host mapping.
-- If login fails, verify API pod logs and DB seed user.
+### Track Product
+
+1. Open Orders tab.
+2. Click Track Product for the selected order.
+3. Review tracking code and timeline (placed, packed, shipped, out for delivery, delivered).
+
+### Request Refund
+
+1. Open Orders tab.
+2. For a paid order, enter refund reason.
+3. Click Request Refund.
+4. Check status in Your Refund Requests section.
+
+Possible statuses:
+
+1. Pending
+2. Approved
+3. Rejected
+
+If rejected, admin reason is displayed.
+
+## Admin Flow
+
+### Review Refund Queue
+
+1. Login using Admin Login.
+2. Open Admin Refunds tab.
+3. Review each request with user and order details.
+
+### Decide Refund
+
+1. Click Approve Refund to accept.
+2. Click Reject Refund to reject.
+3. Enter rejection reason when rejecting.
+
+## AI Sales Assistant
+
+1. Click Chat with Sam.
+2. Ask product or shopping questions.
+3. Assistant responds using backend chat endpoint.
+
+## Troubleshooting
+
+1. If app does not open, verify ingress host mapping and minikube tunnel.
+2. If login fails, verify DB seed data and API logs.
+3. If refund request fails, ensure API deployment is updated and user order status is Paid.

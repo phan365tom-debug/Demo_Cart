@@ -1,53 +1,96 @@
 # Design Document
 
-## Architecture
+## 1. System Overview
 
-- UI (React + Nginx) in Kubernetes
-- API (.NET 8 + Dapper) in Kubernetes
-- SQL Server external to Kubernetes on host machine
+Demo Cart is a Kubernetes-hosted ecommerce demo platform with role-based access, order management, refund workflows, and observability.
 
-## Request Flow
+Primary components:
 
-1. Browser requests kubecart.local
-2. Ingress routes:
-   - / to ui-svc
-   - /api to api-svc
-3. API uses DB_* env vars to connect to external SQL Server
-4. API authenticates user and returns JWT
-5. UI stores token and calls protected todos endpoints
+1. UI service: React SPA served by Nginx
+2. API service: .NET 8 Minimal API with Dapper
+3. Data store: External SQL Server
+4. Ingress: NGINX Ingress Controller
+5. Observability: Prometheus, Grafana, Loki, Promtail
 
-Commerce flow:
+## 2. Architecture
 
-1. UI reads product catalog from /api/catalog
-2. User adds items via /api/cart/items
-3. UI reads cart via /api/cart
-4. Checkout creates order in PendingPayment state via /api/orders/checkout
-5. Payment page confirms order via /api/payments/pay and marks order as Paid
+### Runtime topology
 
-AI support flow:
+1. Browser -> Ingress host
+2. Ingress `/` -> ui-svc
+3. Ingress `/api` -> api-svc
+4. API -> SQL Server via DB_* environment configuration
 
-1. UI sends user message to /api/chat/send
-2. API returns assistant guidance for usage and troubleshooting
+### Auth model
 
-## Configuration Strategy
+1. API issues JWT on successful login.
+2. JWT contains user id and role claim (`user` or `admin`).
+3. UI sends bearer token for protected endpoints.
 
-- Non-sensitive config in ConfigMap
-- Sensitive values in separate Secrets:
-  - db-secret (DB_USER, DB_PASSWORD)
-  - jwt-secret (JWT_SIGNING_KEY)
+## 3. Functional Workflows
 
-## Health Strategy
+### Shopping workflow
 
-- Liveness: /health/live (process level)
-- Readiness: /health/ready (includes DB query check)
+1. Catalog load: `GET /api/catalog`
+2. Add cart item: `POST /api/cart/items`
+3. Cart fetch: `GET /api/cart`
+4. Checkout: `POST /api/orders/checkout` (status `PendingPayment`)
+5. Payment: `POST /api/payments/pay` (status `Paid`)
 
-## Scaling
+### Refund workflow
 
-- API and UI each run at 2 replicas
-- Services route traffic across ready pods
+1. User submits refund reason:
+  `POST /api/refunds/request`
+2. User checks own requests:
+  `GET /api/refunds/my`
+3. Admin views queue:
+  `GET /api/admin/refunds`
+4. Admin decision (approve/reject with reason):
+  `POST /api/admin/refunds/{id}/decision`
+5. Approved request marks order as `Refunded`.
 
-## Operational Notes
+### Product tracking workflow
 
-- External dependency failures surface as readiness failures
-- This prevents broken API pods from receiving production traffic
-- Order and payment are transactional in SQL Server to avoid partial checkout writes
+1. User requests tracking timeline:
+  `GET /api/orders/{orderId}/tracking`
+2. API returns tracking code, current status, and timeline steps.
+
+### AI assistant workflow
+
+1. UI chat submits prompt:
+  `POST /api/chat/send`
+2. API uses OpenAI key if configured, otherwise fallback assistant logic.
+
+## 4. Configuration and Secrets
+
+Configuration strategy:
+
+1. ConfigMap for non-secret settings
+2. Secret for DB credentials
+3. Secret for JWT signing key
+4. Secret for optional AI key
+
+## 5. Reliability and Health
+
+1. Liveness endpoint: `/health/live`
+2. Readiness endpoint: `/health/ready` with DB check
+3. Deployments run 2 replicas each for API and UI
+4. Ingress sticky sessions enabled for better demo consistency
+
+## 6. Fallback Behavior
+
+When SQL connectivity is unavailable, selected API modules use in-memory fallback stores to keep demo flow operational for cart/order/payment and catalog continuity.
+
+## 7. Security Considerations
+
+1. JWT-based auth for protected APIs
+2. Role checks on admin refund APIs
+3. CORS restricted to known UI origins
+4. Do not store production credentials in repository
+
+## 8. Observability
+
+1. Metrics from Prometheus
+2. Dashboards in Grafana
+3. Logs from Loki via Promtail
+4. App-specific log dashboards for Demo Cart operations
