@@ -2,6 +2,13 @@
 
 Demo Cart is a cloud-native ecommerce demo application for capstone submission.
 
+## Start Here (Non-Technical)
+
+If you are a reviewer or stakeholder without technical background, read:
+
+1. docs/README_NON_TECHNICAL.md
+2. README_NON_TECHNICAL.md
+
 Stack:
 
 - UI: React + Vite + Nginx
@@ -124,6 +131,7 @@ By default, UI calls API via same-origin `/api` in production build.
 
 - User Manual: docs/USER_MANUAL.md
 - Design Document: docs/DESIGN.md
+- Non-Technical Guide: docs/README_NON_TECHNICAL.md
 - Grafana Guide: docs/GRAFANA.md
 - Debug Guide: docs/DEBUGGING.md
 - Screenshot Checklist: docs/SCREENSHOT_CHECKLIST.md
