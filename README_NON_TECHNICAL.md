@@ -1,6 +1,10 @@
-# Demo Cart - Non-Technical Guide
+# Demo Cart - Non-Technical README
 
-This file is a quick entry point for non-technical readers.
+This is the non-technical README.
+
+It is intentionally simple and business-friendly.
+
+The technical guide is in README.md.
 
 Read the full plain-language guide here:
 

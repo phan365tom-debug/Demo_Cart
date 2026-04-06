@@ -1,13 +1,11 @@
-# Demo Cart
+# Demo Cart (Technical README)
 
-Demo Cart is a cloud-native ecommerce demo application for capstone submission.
+This is the technical README for developers and DevOps reviewers.
 
-## Start Here (Non-Technical)
+If you need the non-technical version, use:
 
-If you are a reviewer or stakeholder without technical background, read:
-
-1. docs/README_NON_TECHNICAL.md
-2. README_NON_TECHNICAL.md
+1. README_NON_TECHNICAL.md
+2. docs/README_NON_TECHNICAL.md
 
 Stack:
 
