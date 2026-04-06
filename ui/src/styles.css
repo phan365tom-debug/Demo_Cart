@@ -1,0 +1,422 @@
+:root {
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  color: #111827;
+  background: radial-gradient(circle at top, #d1fae5 0%, #ffffff 55%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+.page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+}
+
+.card {
+  width: 100%;
+  max-width: 760px;
+  border-radius: 16px;
+  padding: 1.5rem;
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+}
+
+h1 {
+  margin: 0;
+}
+
+.subtitle {
+  color: #4b5563;
+  margin-top: 0.35rem;
+}
+
+.form {
+  margin-top: 1.25rem;
+  display: grid;
+  gap: 0.8rem;
+}
+
+.form-inline {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.7rem;
+}
+
+input {
+  width: 100%;
+  margin-top: 0.35rem;
+  border: 1px solid #9ca3af;
+  border-radius: 8px;
+  padding: 0.6rem 0.7rem;
+}
+
+button {
+  border: none;
+  border-radius: 10px;
+  background: #047857;
+  color: white;
+  font-weight: 600;
+  padding: 0.6rem 1rem;
+  cursor: pointer;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.tabs {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.login-mode-switch {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.tab {
+  background: #065f46;
+}
+
+.tab.active {
+  background: #10b981;
+}
+
+.grid {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 0.8rem;
+}
+
+.product {
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  padding: 0.7rem;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.product img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.product h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.product p {
+  margin: 0;
+}
+
+.product-actions {
+  display: flex;
+  gap: 0.45rem;
+}
+
+.product-actions button {
+  flex: 1;
+}
+
+.total {
+  font-weight: 700;
+}
+
+.cart-line {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.cart-thumb {
+  width: 56px;
+  height: 56px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 1px solid #d1d5db;
+}
+
+.shipping-card,
+.policy-card {
+  margin: 1rem 0;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  padding: 0.8rem;
+  background: #f9fafb;
+}
+
+.shipping-card h3,
+.policy-card h3 {
+  margin: 0 0 0.6rem;
+}
+
+.shipping-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.policy-list {
+  margin: 0;
+  padding-left: 1rem;
+}
+
+.order-line {
+  line-height: 1.35;
+}
+
+.order-item {
+  display: block;
+}
+
+.order-actions {
+  margin-top: 0.7rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+
+.tracking-card {
+  margin-top: 0.7rem;
+  border: 1px dashed #9ca3af;
+  border-radius: 8px;
+  padding: 0.6rem;
+  background: #f8fafc;
+}
+
+.danger-btn {
+  background: #b91c1c;
+}
+
+.chat-box {
+  margin-top: 0.8rem;
+  max-height: 240px;
+  overflow: auto;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  padding: 0.8rem;
+  background: #f8fafc;
+}
+
+.chat-box p {
+  margin: 0.2rem 0;
+}
+
+.chat-box .ai {
+  color: #065f46;
+}
+
+.chat-box .user {
+  color: #1f2937;
+}
+
+.list {
+  margin-top: 1rem;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.list li {
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  padding: 0.7rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.8rem;
+  align-items: center;
+}
+
+.done {
+  text-decoration: line-through;
+  color: #6b7280;
+}
+
+.message {
+  margin-top: 1rem;
+  color: #374151;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 24, 39, 0.55);
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+}
+
+.modal {
+  width: 100%;
+  max-width: 840px;
+  background: #fff;
+  border-radius: 14px;
+  border: 1px solid #d1d5db;
+  padding: 1rem;
+}
+
+.modal-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.modal-main-image {
+  margin-top: 0.8rem;
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.thumb-row {
+  margin-top: 0.75rem;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.55rem;
+}
+
+.thumb-item {
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 0.35rem;
+  text-align: center;
+}
+
+.thumb-item img {
+  width: 100%;
+  height: 78px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.spec-list {
+  margin: 0.4rem 0 0;
+}
+
+.sales-chat-shell {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 40;
+  display: grid;
+  justify-items: end;
+  gap: 0.55rem;
+}
+
+.sales-chat-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  border-radius: 999px;
+  padding: 0.55rem 0.9rem;
+  background: linear-gradient(120deg, #065f46, #059669);
+  box-shadow: 0 10px 22px rgba(6, 95, 70, 0.34);
+}
+
+.sales-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: #d1fae5;
+  color: #064e3b;
+  animation: bob 1.6s ease-in-out infinite;
+}
+
+.sales-chat-panel {
+  width: min(360px, calc(100vw - 2rem));
+  border: 1px solid #a7f3d0;
+  border-radius: 14px;
+  background: #ffffff;
+  padding: 0.8rem;
+  box-shadow: 0 16px 35px rgba(0, 0, 0, 0.2);
+  animation: floatIn 0.25s ease-out;
+}
+
+.sales-chat-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.3rem;
+}
+
+.sales-chat-head h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.sales-chat-head small {
+  color: #047857;
+  font-weight: 700;
+}
+
+.sales-chat-form {
+  margin-top: 0.6rem;
+}
+
+@keyframes bob {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes floatIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 640px) {
+  .toolbar,
+  .form-inline,
+  .list li,
+  .cart-line {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .thumb-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .shipping-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .order-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .sales-chat-shell {
+    right: 0.7rem;
+    bottom: 0.7rem;
+  }
+}

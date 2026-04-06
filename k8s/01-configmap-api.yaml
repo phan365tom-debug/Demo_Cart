@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-config
+  namespace: demo
+data:
+  ASPNETCORE_ENVIRONMENT: "Production"
+  ALLOW_DEGRADED_READINESS: "true"
+  DEMO_LOGIN_ENABLED: "true"
+  DB_HOST: "host.minikube.internal"
+  DB_PORT: "1433"
+  DB_NAME: "KubeCartDb"
+  DB_TRUST_SERVER_CERT: "true"
+  JWT_ISSUER: "kubecart-api"
+  JWT_AUDIENCE: "kubecart-ui"
